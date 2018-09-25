@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.main {
+				background-color: #fff;
+				border-radius: 20px;
+				width: 400px;
+				margin: auto;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+			}
+			
+			h1 {
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="main">
+			<h1>登录</h1>
+			<form class="form">
+				<table style="display: block;">
+					<tr>
+						<td>用户名：</td>
+						<td><input type="text" name="username" value="" /></td>
+					</tr>
+					<tr>
+						<td>密&nbsp;码：</td>
+						<td><input type="text" name="pwd" /></td>
+					</tr>
+					<br />
+					<tr>
+						<td colspan="2">
+							<input style="margin: 0 auto;display: block;" class="btn" type="button" value="登录" />
+							<a href="reg.html">注册</a>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+
+	</body>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$(".btn").click(function() {
+				var username = $(".username2").val();
+				var pwd = $(".pwd2").val()
+				$.ajax({
+					type: "post",
+					url: "user/login",
+					data: $(".form").serialize(),
+					async: true,
+					success: function(data) {
+						if(data.state==1){
+							window.location.href="user/nav.html"
+						}else{
+							alert("登录失败")
+						}
+					}
+				});
+			})
+		})
+	</script>
+
+</html>

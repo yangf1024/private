@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body>
+<!--<form action="user/register">-->
+    <p>用户名：</p>
+    <input type="text" name="username" class="username">
+    <p>密码：</p>
+    <input type="text" name="pwd" class="pwd">
+    <p>手机号：</p>
+    <input type="text" name="phone" class="phone">
+    <p>推荐人：</p>
+    <input type="text" name="recom" class="recom">
+    <input type="button" value="提交" class="but">
+
+<hr>
+<!--</form>-->
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(".but").click(function() {
+		var username = $(".username").val();
+		var pwd = $(".pwd").val()
+		var phone = $(".phone").val()
+		var recom = $(".recom").val()
+		$.ajax({
+			type: "post",
+			url: "user/register",
+			data: {
+				"username":username,
+				"pwd":pwd,
+				"phone":phone,
+				"recom":recom
+			},
+			async: true,
+			success: function(data) {
+			    console.log(data)
+			}
+		});
+	})
+	$(".btn2").click(function() {
+		var username = $(".username2").val();
+		var pwd = $(".pwd2").val()
+		$.ajax({
+			type: "post",
+			url: "user/login",
+			data: {
+				"username":username,
+				"pwd":pwd
+			},
+			async: true,
+			success: function(data) {
+			    console.log(data)
+			}
+		});
+	})
+	$(".btn3").click(function() {
+		$.ajax({
+			type: "post",
+			url: "user/to",
+			async: true,
+			success: function(data) {
+			    console.log(1)
+			    console.log(data)
+			},
+			error:function(d){
+			    console.log(d)
+			}
+		});
+	})
+	$("#up").change(function() {
+			var file = this.files[0];
+			if(undefined == file) {
+				return;
+			}
+			r = new FileReader();
+			r.readAsDataURL(file);
+			r.onload = function(e) {
+				var base64 = e.target.result;
+				console.log(base64)
+				$.ajax({
+					type:"post",
+					data:{
+						"imgPath":base64
+					},
+					url:"user/upload",
+					async:true,
+					success:function(d){
+					    console.log(d)
+					}
+				});
+			}
+		});
+</script>
+</html>

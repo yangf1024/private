@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>发布需求</title>
+	</head>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+	<body>
+		<table>
+			<form action="" method="post">
+				<tr>
+					<td>商品链接：</td>
+					<td><input type="text" name="comUrl" class="url" /></td>
+				</tr>
+				<tr>
+					<td>关键词：</td>
+					<td><input type="text" name="keyword" /></td>
+				</tr>
+				<tr>
+					<td>主图：</td>
+					<td><input type="text" name="imgUrl" id="imgUrl" value="" /></td>
+					<td><img src="" class="img" width="200px"/></td>
+				</tr>
+				<tr>
+					<td>掌柜名：</td>
+					<td><input type="text" name="bossName" /></td>
+				</tr>
+				<tr>
+					<td>商品价格：</td>
+					<td><input type="text" name="price" /></td>
+				</tr>
+				<tr>
+					<td>佣金：</td>
+					<td><input type="text" name="brokerage" /></td>
+				</tr>
+				<tr>
+					<td>任务数量：</td>
+					<td><input type="number" name="taskNum" /></td>
+				</tr>
+
+				<tr>
+					<td>任务时间：</td>
+					<td>
+						<input type="date" name="startDate" />
+						<input type="date" name="endDate" />
+					</td>
+				</tr>
+				<tr>
+					<td>留言备注：</td>
+					<td>
+						<textarea name="remark"></textarea>
+					</td>
+				</tr>
+				<input type="button" class="btn" value="提交" />
+			</form>
+
+		</table>
+	</body>
+
+</html>
+<script type="text/javascript">
+	$(function() {
+		$(".url").blur(function() {
+			var url = $(".url").val()
+			$.ajax({
+				type: "post",
+				url: "/shuadan/url",
+				data: {
+					"html": url
+				},
+				async: true,
+				success: function(data) {
+					$(".img").attr("src", "//" + data.imgUrl)
+					$("#imgUrl").val(data.imgUrl)
+				}
+			});
+		})
+		$(".btn").click(function(){
+			var form = $("form").serialize();
+			$.ajax({
+				type:"post",
+				url:"task/newTask",
+				data:form,
+				async:true,
+				success:function(d){
+					console.log(d)
+				}
+			});
+		})
+	})
+</script>

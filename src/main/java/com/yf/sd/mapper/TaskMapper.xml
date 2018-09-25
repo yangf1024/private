@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yf.sd.mapper.TaskMapper">
+    <insert id="addTask" parameterType="task">
+        insert into task(keyword,imgUrl,bossName,price,brokerage,taskNum,comUrl,startDate,endDate,remark,master) values(#{keyword}, #{imgUrl},#{bossName},#{price},#{brokerage},#{taskNum},#{comUrl},#{startDate},#{endDate},#{remark},#{master})
+    </insert>
+
+</mapper>
